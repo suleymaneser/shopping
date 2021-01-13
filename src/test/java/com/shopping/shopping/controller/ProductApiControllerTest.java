@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.dto.ProductDTO;
-import com.shopping.shopping.service.ProductService;
+import com.shopping.shopping.service.impl.ProductCommandServiceImpl;
 import java.math.BigDecimal;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.Before;
@@ -27,20 +27,20 @@ public class ProductApiControllerTest {
     public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
     @Mock
-    private ProductService productService;
+    private ProductCommandServiceImpl productCommandServiceImpl;
 
     private ProductApiController controller;
 
     @Before
     public void setup() {
-        controller = new ProductApiController(productService);
+        controller = new ProductApiController(productCommandServiceImpl);
     }
 
     @Test
     public void givenProductDTOWhenCreateProduct() {
         // Arrange
         ProductDTO dto = prepareProduct().toDto();
-        when(productService.createProduct(any())).thenReturn(prepareProduct());
+        when(productCommandServiceImpl.createProduct(any())).thenReturn(prepareProduct());
 
         // Act
         Product response = controller.createProduct(dto);

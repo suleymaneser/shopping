@@ -2,7 +2,8 @@ package com.shopping.shopping.controller;
 
 import com.shopping.shopping.domain.Customer;
 import com.shopping.shopping.dto.CustomerDTO;
-import com.shopping.shopping.service.CustomerService;
+import com.shopping.shopping.service.CustomerCommandService;
+import com.shopping.shopping.service.CustomerQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -21,27 +22,29 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "customer-api")
 public class CustomerApiController {
 
-    private final CustomerService customerService;
+    private final CustomerCommandService customerCommandService;
+
+    private final CustomerQueryService customerQueryService;
 
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "createCustomer", notes = "Create Customer")
     public Customer createCustomer(@RequestBody CustomerDTO dto) {
-        return customerService.createCustomer(dto);
+        return customerCommandService.createCustomer(dto);
     }
 
     @GetMapping(value = "/findAllByTypeCode")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "findAllByTypeCode", notes = "Find All By Type Code")
     public List<Customer> findAllByTypeCode(@RequestBody String typeCode) {
-        return customerService.findAllByTypeCode(typeCode);
+        return customerQueryService.findAllByTypeCode(typeCode);
     }
 
     @GetMapping(value = "/getAll")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "getAllCustomer", notes = "Get All Customer")
     public List<Customer> getAllCustomer() {
-        return customerService.getAllCustomer();
+        return customerQueryService.getAllCustomer();
     }
 
 }

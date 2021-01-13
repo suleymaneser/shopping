@@ -2,7 +2,7 @@ package com.shopping.shopping.controller;
 
 import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.dto.ProductDTO;
-import com.shopping.shopping.service.ProductService;
+import com.shopping.shopping.service.ProductCommandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "product-api")
 public class ProductApiController {
 
-    private final ProductService productService;
+    private final ProductCommandService productCommandService;
 
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "createProduct", notes = "Create Product")
     public Product createProduct(@RequestBody ProductDTO dto) {
-        return productService.createProduct(dto);
+        return productCommandService.createProduct(dto);
     }
 
 }

@@ -6,7 +6,8 @@ import static org.mockito.Mockito.when;
 import com.shopping.shopping.domain.Customer;
 import com.shopping.shopping.domain.CustomerType;
 import com.shopping.shopping.dto.CustomerDTO;
-import com.shopping.shopping.service.CustomerService;
+import com.shopping.shopping.service.CustomerQueryService;
+import com.shopping.shopping.service.impl.CustomerCommandServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.JUnitSoftAssertions;
@@ -33,13 +34,16 @@ public class CustomerApiControllerTest {
     public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
     @Mock
-    private CustomerService customerService;
+    private CustomerCommandServiceImpl customerCommandServiceImpl;
+
+    @Mock
+    private CustomerQueryService customerQueryService;
 
     private CustomerApiController controller;
 
     @Before
     public void setup() {
-        controller = new CustomerApiController(customerService);
+        controller = new CustomerApiController(customerCommandServiceImpl, customerQueryService);
     }
 
     @Test
@@ -47,7 +51,7 @@ public class CustomerApiControllerTest {
         // Arrange
         Customer customer = prepareCustomer();
         CustomerDTO dto = customer.toDTO(customer, true);
-        when(customerService.createCustomer(dto)).thenReturn(customer);
+        when(customerCommandServiceImpl.createCustomer(dto)).thenReturn(customer);
 
         // Act
         Customer response = controller.createCustomer(dto);
@@ -66,7 +70,7 @@ public class CustomerApiControllerTest {
         // Arrange
         List<Customer> customerList = new ArrayList<>();
         customerList.add(prepareCustomer());
-        when(customerService.findAllByTypeCode(anyString())).thenReturn(customerList);
+        when(customerQueryService.findAllByTypeCode(anyString())).thenReturn(customerList);
 
         // Act
         List<Customer> response = controller.findAllByTypeCode(anyString());
@@ -85,7 +89,7 @@ public class CustomerApiControllerTest {
         // Arrange
         List<Customer> customerList = new ArrayList<>();
         customerList.add(prepareCustomer());
-        when(customerService.getAllCustomer()).thenReturn(customerList);
+        when(customerQueryService.getAllCustomer()).thenReturn(customerList);
 
         // Act
         List<Customer> response = controller.getAllCustomer();

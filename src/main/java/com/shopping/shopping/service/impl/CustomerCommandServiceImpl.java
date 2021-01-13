@@ -1,41 +1,32 @@
-package com.shopping.shopping.service;
+package com.shopping.shopping.service.impl;
 
 import com.shopping.shopping.domain.Customer;
 import com.shopping.shopping.domain.CustomerType;
 import com.shopping.shopping.dto.CustomerDTO;
 import com.shopping.shopping.repository.CustomerRepository;
 import com.shopping.shopping.repository.CustomerTypeRepository;
-import java.util.List;
+import com.shopping.shopping.service.CustomerCommandService;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService {
+public class CustomerCommandServiceImpl implements CustomerCommandService {
 
     private final CustomerRepository customerRepository;
 
     private final CustomerTypeRepository customerTypeRepository;
 
-    private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartCommandServiceImpl shoppingCartCommandServiceImpl;
 
     // given parameters when  create user
+    @Override
     public Customer createCustomer(CustomerDTO dto) {
         Customer customer = prepareCustomer(dto);
         customerRepository.save(customer);
-        shoppingCartService.createShoppingCart(customer.getId());
+        shoppingCartCommandServiceImpl.createShoppingCart(customer.getId());
         return customer;
-    }
-
-    // find all by type code
-    public List<Customer> findAllByTypeCode(String typeCode) {
-        return customerRepository.findAllByTypeCode(typeCode);
-    }
-
-    // find all user
-    public List<Customer> getAllCustomer() {
-        return customerRepository.findAll();
     }
 
     private Customer prepareCustomer(CustomerDTO dto) {
