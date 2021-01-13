@@ -1,2 +1,1 @@
-# shopping
-Shopping App
+# shoppingg
