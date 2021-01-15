@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.shopping.shopping.domain.Product;
+import com.shopping.shopping.domain.ProductPrice;
 import com.shopping.shopping.dto.ProductDTO;
 import com.shopping.shopping.service.impl.ProductCommandServiceImpl;
 import java.math.BigDecimal;
@@ -49,13 +50,13 @@ public class ProductApiControllerTest {
         softly.assertThat(response.getId()).isEqualTo(ID);
         softly.assertThat(response.getName()).isEqualTo(NAME);
         softly.assertThat(response.getProductCode()).isEqualTo(PRODUCT_CODE);
-        softly.assertThat(response.getAmount()).isEqualTo(AMOUNT);
+        softly.assertThat(response.getProductPrice().getAmount()).isEqualTo(AMOUNT);
     }
 
     private Product prepareProduct() {
         return Product.builder()
                 .id(ID)
-                .amount(AMOUNT)
+                .productPrice(ProductPrice.builder().amount(AMOUNT).build())
                 .name(NAME)
                 .productCode(PRODUCT_CODE).build();
     }
