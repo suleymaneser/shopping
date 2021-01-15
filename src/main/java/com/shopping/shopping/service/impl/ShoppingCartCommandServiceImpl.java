@@ -71,7 +71,7 @@ public class ShoppingCartCommandServiceImpl implements ShoppingCartCommandServic
             product = productRepository.findOneById(dto.getProduct());
         }
         CalculateDTO calculateDTO = CalculateDTO.builder()
-                .amount(product.getAmount())
+                .amount(product.getProductPrice().getAmount())
                 .count(dto.getProductCount()).build();
         BigDecimal totalAmount = shoppingCartQueryService.calculate(calculateDTO);
         ShoppingCartItem shoppingCartItem = new ShoppingCartItem();

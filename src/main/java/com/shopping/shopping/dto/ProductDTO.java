@@ -1,9 +1,11 @@
 package com.shopping.shopping.dto;
 
+import com.shopping.shopping.domain.Product;
+import com.shopping.shopping.domain.ProductPrice;
 import io.swagger.annotations.ApiModel;
-import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 @ApiModel
 @Getter
@@ -16,6 +18,19 @@ public class ProductDTO {
 
     private String productCode;
 
-    private BigDecimal amount;
+    private Long categoryId;
+
+    private Boolean isActive;
+
+    private String description;
+
+    private String features;
+
+    private Long productPrice;
+
+    public Product fromDto() {
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(this, Product.class);
+    }
 
 }
