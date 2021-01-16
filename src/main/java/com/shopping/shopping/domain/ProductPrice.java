@@ -1,5 +1,6 @@
 package com.shopping.shopping.domain;
 
+import com.shopping.shopping.enums.CurrencyType;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,8 @@ public class ProductPrice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long productId;
-
     private BigDecimal amount;
 
-    private String currency;
+    private CurrencyType currency;
 
 }
