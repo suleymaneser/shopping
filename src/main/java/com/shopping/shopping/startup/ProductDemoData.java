@@ -8,6 +8,7 @@ import com.shopping.shopping.service.ProductQueryService;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class ProductDemoData {
                             .name("name : " + item)
                             .isActive(true)
                             .features("features : " + item)
-                            .sellerId(Long.decode(randomUUID().toString()))
+                            .sellerId(1L)
                             .build()));
         }
     }
