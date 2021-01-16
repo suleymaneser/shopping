@@ -37,7 +37,7 @@ public class ProductApiControllerTest {
     private ProductApiController controller;
 
     @Test
-    public void givenProductDTOWhenCreateProduct() {
+    public void givenProductDTOWhenCreateProduct() throws Exception {
         // Arrange
         ProductDTO dto = prepareProduct().toDto();
         when(productCommandServiceImpl.createProduct(any())).thenReturn(prepareProduct());

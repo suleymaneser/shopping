@@ -44,7 +44,6 @@ public class Customer {
 
     public CustomerDTO toDTO(Customer customer, boolean status) {
         CustomerDTO dto = new CustomerDTO();
-        dto.setId(customer.getId());
         dto.setName(customer.getName());
         dto.setAddress(customer.getAddress());
         dto.setIdentificationNumber(customer.getIdentificationNumber());
