@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.domain.ProductPrice;
 import com.shopping.shopping.dto.ProductDTO;
+import com.shopping.shopping.service.ProductQueryService;
 import com.shopping.shopping.service.impl.ProductCommandServiceImpl;
 import java.math.BigDecimal;
 import org.assertj.core.api.JUnitSoftAssertions;
@@ -30,12 +31,10 @@ public class ProductApiControllerTest {
     @Mock
     private ProductCommandServiceImpl productCommandServiceImpl;
 
-    private ProductApiController controller;
+    @Mock
+    private ProductQueryService productQueryService;
 
-    @Before
-    public void setup() {
-        controller = new ProductApiController(productCommandServiceImpl);
-    }
+    private ProductApiController controller;
 
     @Test
     public void givenProductDTOWhenCreateProduct() {
@@ -54,11 +53,19 @@ public class ProductApiControllerTest {
     }
 
     private Product prepareProduct() {
-        return Product.builder()
-                .id(ID)
-                .productPrice(ProductPrice.builder().amount(AMOUNT).build())
-                .name(NAME)
-                .productCode(PRODUCT_CODE).build();
+        Product product = new Product();
+        ProductPrice productPrice = new ProductPrice();
+        productPrice.setAmount(AMOUNT);
+        product.setId(ID);
+        product.setProductPrice(productPrice);
+        product.setName(NAME);
+        product.setProductCode(PRODUCT_CODE);
+        return product;
+    }
+
+    @Before
+    public void setup() {
+        controller = new ProductApiController(productCommandServiceImpl, productQueryService);
     }
 
 }
