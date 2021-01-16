@@ -1,14 +1,11 @@
 package com.shopping.shopping.startup;
 
-import static java.util.UUID.randomUUID;
-
 import com.shopping.shopping.dto.ProductDTO;
 import com.shopping.shopping.service.ProductCommandService;
 import com.shopping.shopping.service.ProductQueryService;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +17,7 @@ public class ProductDemoData {
 
     private final ProductCommandService productCommandService;
 
-    @EventListener(ApplicationReadyEvent.class)
+    //@EventListener(ApplicationReadyEvent.class)
     public void migrate() {
         Long countOfData = productQueryService.count();
         if (countOfData.equals(0L)) {
