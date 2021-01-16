@@ -8,12 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
-@Builder
 @Getter
 @Setter
 @Entity
@@ -43,7 +41,10 @@ public class Product {
     private ProductPrice productPrice;
 
     @JoinColumn(name = "sellerId")
-    private Long seller;
+    private Customer seller;
+
+    public Product() {
+    }
 
     public ProductDTO toDto() {
         ModelMapper mapper = new ModelMapper();

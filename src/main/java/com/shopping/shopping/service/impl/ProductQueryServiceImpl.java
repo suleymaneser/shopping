@@ -1,7 +1,9 @@
 package com.shopping.shopping.service.impl;
 
+import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.repository.ProductRepository;
 import com.shopping.shopping.service.ProductQueryService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class ProductQueryServiceImpl implements ProductQueryService {
     @Override
     public Long count() {
         return productRepository.count();
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
     }
 
 }

@@ -9,6 +9,7 @@ import com.shopping.shopping.repository.CategoryRepository;
 import com.shopping.shopping.repository.CustomerRepository;
 import com.shopping.shopping.repository.ProductPriceRepository;
 import com.shopping.shopping.repository.ProductRepository;
+import com.shopping.shopping.dto.request.UpdateProductRequest;
 import com.shopping.shopping.service.ProductCommandService;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,30 @@ public class ProductCommandServiceImpl implements ProductCommandService {
         return product;
     }
 
+    @Override
+    public Product updateProduct(Long productId, UpdateProductRequest request) {
+        Product product = productRepository.findOneById(productId);
+        if (!product.getIsActive().equals(true)) {
+            System.out.println("The product you want to update is not active");
+        }
+        product.setProductCode(request.getProduct().getProductCode());
+        product.setName(request.getProduct().getName());
+        product.setDescription(request.getProduct().getDescription());
+        product.setFeatures(request.getProduct().getFeatures());
+        if (Objects.nonNull(request.getProduct().getProductPrice())) {
+            product.setProductPrice(request.getProduct().getProductPrice());
+            prepareProductPrice(product.getProductPrice());
+        }
+        if (Objects.nonNull(request.getProduct().getCategoryId())) {
+            product.setCategoryId(prepareCategory(request.getProduct().getCategoryId()));
+        }
+        if (Objects.nonNull(request.getProduct().getSellerId())) {
+            product.setSeller(prepareSeller(request.getProduct().getSellerId()));
+        }
+        productRepository.save(product);
+        return product;
+    }
+
     private Category prepareCategory(Long id) {
         if (Objects.nonNull(id)) {
             return categoryRepository.getOne(id);
@@ -41,21 +66,21 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     }
 
     private Product prepareProduct(ProductDTO dto) {
-        return Product.builder()
-                .name(dto.getName())
-                .productCode(dto.getProductCode())
-                .categoryId(prepareCategory(dto.getCategoryId()))
-                .isActive(true)
-                .description(dto.getDescription())
-                .features(dto.getFeatures())
-                .productPrice(prepareProductPrice(dto.getProductPrice()))
-                .seller(dto.getSellerId())
-                .build();
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setProductCode(dto.getProductCode());
+        product.setCategoryId(prepareCategory(dto.getCategoryId()));
+        product.setFeatures(dto.getFeatures());
+        product.setProductPrice(prepareProductPrice(dto.getProductPrice()));
+        product.setSeller(prepareSeller(dto.getSellerId()));
+        product.setIsActive(true);
+        return product;
     }
 
-    private ProductPrice prepareProductPrice(Long id) {
-        if (Objects.nonNull(id)) {
-            return productPriceRepository.getOne(id);
+    private ProductPrice prepareProductPrice(ProductPrice productPrice) {
+        if (Objects.nonNull(productPrice)) {
+            return productPriceRepository.save(productPrice);
         }
         return null;
     }
