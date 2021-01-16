@@ -1,9 +1,6 @@
 package com.shopping.shopping.domain;
 
 import com.shopping.shopping.dto.ProductDTO;
-import com.sun.istack.NotNull;
-import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,7 +39,11 @@ public class Product {
     private String features;
 
     @ManyToOne
+    @JoinColumn(name = "productPriceId")
     private ProductPrice productPrice;
+
+    @JoinColumn(name = "sellerId")
+    private Long seller;
 
     public ProductDTO toDto() {
         ModelMapper mapper = new ModelMapper();

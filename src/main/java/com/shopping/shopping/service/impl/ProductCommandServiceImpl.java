@@ -1,10 +1,12 @@
 package com.shopping.shopping.service.impl;
 
 import com.shopping.shopping.domain.Category;
+import com.shopping.shopping.domain.Customer;
 import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.domain.ProductPrice;
 import com.shopping.shopping.dto.ProductDTO;
 import com.shopping.shopping.repository.CategoryRepository;
+import com.shopping.shopping.repository.CustomerRepository;
 import com.shopping.shopping.repository.ProductPriceRepository;
 import com.shopping.shopping.repository.ProductRepository;
 import com.shopping.shopping.service.ProductCommandService;
@@ -21,6 +23,8 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     private final ProductPriceRepository productPriceRepository;
 
     private final CategoryRepository categoryRepository;
+
+    private final CustomerRepository customerRepository;
 
     @Override
     public Product createProduct(ProductDTO dto) {
@@ -44,12 +48,21 @@ public class ProductCommandServiceImpl implements ProductCommandService {
                 .isActive(true)
                 .description(dto.getDescription())
                 .features(dto.getFeatures())
-                .productPrice(prepareProductPrice(dto.getProductPrice())).build();
+                .productPrice(prepareProductPrice(dto.getProductPrice()))
+                .seller(dto.getSellerId())
+                .build();
     }
 
     private ProductPrice prepareProductPrice(Long id) {
         if (Objects.nonNull(id)) {
             return productPriceRepository.getOne(id);
+        }
+        return null;
+    }
+
+    private Customer prepareSeller(Long id) {
+        if (Objects.nonNull(id)) {
+            return customerRepository.getOne(id);
         }
         return null;
     }

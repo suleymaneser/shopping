@@ -1,18 +1,15 @@
 package com.shopping.shopping.dto;
 
-import com.shopping.shopping.domain.Product;
-import com.shopping.shopping.domain.ProductPrice;
 import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 
 @ApiModel
 @Getter
 @Setter
+@Builder
 public class ProductDTO {
-
-    private Long id;
 
     private String name;
 
@@ -28,9 +25,6 @@ public class ProductDTO {
 
     private Long productPrice;
 
-    public Product fromDto() {
-        ModelMapper mapper = new ModelMapper();
-        return mapper.map(this, Product.class);
-    }
+    private Long sellerId;
 
 }
