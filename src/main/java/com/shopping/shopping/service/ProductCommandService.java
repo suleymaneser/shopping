@@ -6,8 +6,8 @@ import com.shopping.shopping.dto.request.UpdateProductRequest;
 
 public interface ProductCommandService {
 
-    Product createProduct(ProductDTO dto);
+    Product createProduct(ProductDTO dto) throws Exception;
 
-    Product updateProduct(Long productId, UpdateProductRequest request);
+    Product updateProduct(Long productId, UpdateProductRequest request) throws Exception;
 
 }

@@ -1,6 +1,5 @@
 package com.shopping.shopping.dto;
 
-import com.shopping.shopping.domain.ProductPrice;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +23,7 @@ public class ProductDTO {
 
     private String features;
 
-    private ProductPrice productPrice;
+    private ProductPriceDTO productPrice;
 
     private Long sellerId;
 

@@ -5,11 +5,11 @@ import com.shopping.shopping.domain.Customer;
 import com.shopping.shopping.domain.Product;
 import com.shopping.shopping.domain.ProductPrice;
 import com.shopping.shopping.dto.ProductDTO;
+import com.shopping.shopping.dto.request.UpdateProductRequest;
 import com.shopping.shopping.repository.CategoryRepository;
 import com.shopping.shopping.repository.CustomerRepository;
 import com.shopping.shopping.repository.ProductPriceRepository;
 import com.shopping.shopping.repository.ProductRepository;
-import com.shopping.shopping.dto.request.UpdateProductRequest;
 import com.shopping.shopping.service.ProductCommandService;
 import java.util.Objects;
 import javax.transaction.Transactional;
@@ -34,7 +34,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
 
     @Override
     @Transactional
-    public Product createProduct(ProductDTO dto) {
+    public Product createProduct(ProductDTO dto) throws Exception {
         Product product = prepareProduct(dto);
         productRepository.save(product);
         return product;
@@ -42,7 +42,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
 
     @Override
     @Transactional
-    public Product updateProduct(Long productId, UpdateProductRequest request) {
+    public Product updateProduct(Long productId, UpdateProductRequest request) throws Exception {
         Product product = productRepository.findOneById(productId);
         if (!product.getIsActive().equals(true)) {
             System.out.println("The product you want to update is not active");
@@ -52,7 +52,10 @@ public class ProductCommandServiceImpl implements ProductCommandService {
         product.setDescription(request.getProduct().getDescription());
         product.setFeatures(request.getProduct().getFeatures());
         if (Objects.nonNull(request.getProduct().getProductPrice())) {
-            product.setProductPrice(request.getProduct().getProductPrice());
+            ProductPrice productPrice = new ProductPrice();
+            productPrice.setAmount(request.getProduct().getProductPrice().getAmount());
+            productPrice.setCurrency(request.getProduct().getProductPrice().getCurrency());
+            product.setProductPrice(productPrice);
             prepareProductPrice(product.getProductPrice());
         }
         if (Objects.nonNull(request.getProduct().getCategoryId())) {
@@ -65,21 +68,35 @@ public class ProductCommandServiceImpl implements ProductCommandService {
         return product;
     }
 
-    private Category prepareCategory(Long id) {
+    private Customer checkAndPrepareSeller(Long id) throws Exception {
+        Customer customer;
         if (Objects.nonNull(id)) {
-            return categoryRepository.getOne(id);
+            customer = customerRepository.findById(id).get();
+            if (customer.getTypeCode().getCode().equals(RECEIVER_TYPE)) {
+                throw new Exception("This customer cannot sell products");
+            } else {
+                return customer;
+            }
         }
         return null;
     }
 
-    private Product prepareProduct(ProductDTO dto) {
+    private Category prepareCategory(Long id) {
+        Category category = null;
+        if (Objects.nonNull(id)) {
+            category = categoryRepository.findOneById(id);
+        }
+        return category;
+    }
+
+    private Product prepareProduct(ProductDTO dto) throws Exception {
         Product product = new Product();
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setProductCode(dto.getProductCode());
         product.setCategoryId(prepareCategory(dto.getCategoryId()));
         product.setFeatures(dto.getFeatures());
-        product.setProductPrice(prepareProductPrice(dto.getProductPrice()));
+        product.setProductPrice(prepareProductPrice(dto.getProductPrice().fromDto()));
         product.setSeller(checkAndPrepareSeller(dto.getSellerId()));
         product.setIsActive(true);
         return product;
@@ -88,19 +105,6 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     private ProductPrice prepareProductPrice(ProductPrice productPrice) {
         if (Objects.nonNull(productPrice)) {
             return productPriceRepository.save(productPrice);
-        }
-        return null;
-    }
-
-    private Customer checkAndPrepareSeller(Long id) {
-        Customer customer;
-        if (Objects.nonNull(id)) {
-            customer = customerRepository.findById(id).get();
-            if (customer.getTypeCode().getCode().equals(RECEIVER_TYPE)) {
-                System.out.println("This customer cannot sell products");
-            } else {
-                return customer;
-            }
         }
         return null;
     }

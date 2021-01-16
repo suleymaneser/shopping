@@ -32,7 +32,7 @@ public class ProductApiController {
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "createProduct", notes = "Create Product")
-    public Product createProduct(@RequestBody ProductDTO dto) {
+    public Product createProduct(@RequestBody ProductDTO dto) throws Exception {
         return productCommandService.createProduct(dto);
     }
 
@@ -46,7 +46,8 @@ public class ProductApiController {
     @PutMapping(value = "/updateProduct/{productId}")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "updateProduct", notes = "Update Product")
-    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody UpdateProductRequest request) {
+    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody UpdateProductRequest request)
+            throws Exception {
         return productCommandService.updateProduct(productId, request);
     }
 

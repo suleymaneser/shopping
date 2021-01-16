@@ -21,15 +21,21 @@ public class ProductDemoData {
     public void migrate() {
         Long countOfData = productQueryService.count();
         if (countOfData.equals(0L)) {
-            IntStream.range(0, 20).forEach(item -> productCommandService.createProduct(
-                    ProductDTO.builder()
-                            .description("Product : " + item)
-                            .productCode("code : " + item)
-                            .name("name : " + item)
-                            .isActive(true)
-                            .features("features : " + item)
-                            .sellerId(1L)
-                            .build()));
+            IntStream.range(0, 20).forEach(item -> {
+                try {
+                    productCommandService.createProduct(
+                            ProductDTO.builder()
+                                    .description("Product : " + item)
+                                    .productCode("code : " + item)
+                                    .name("name : " + item)
+                                    .isActive(true)
+                                    .features("features : " + item)
+                                    .sellerId(1L)
+                                    .build());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
