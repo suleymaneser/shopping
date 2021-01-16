@@ -54,8 +54,10 @@ public class ProductApiControllerTest {
 
     private Product prepareProduct() {
         Product product = new Product();
+        ProductPrice productPrice = new ProductPrice();
+        productPrice.setAmount(AMOUNT);
         product.setId(ID);
-        product.setProductPrice(ProductPrice.builder().amount(AMOUNT).build());
+        product.setProductPrice(productPrice);
         product.setName(NAME);
         product.setProductCode(PRODUCT_CODE);
         return product;

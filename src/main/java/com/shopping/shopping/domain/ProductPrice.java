@@ -12,7 +12,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
 @Getter
 @Setter
 @Entity
@@ -28,4 +27,7 @@ public class ProductPrice {
 
     private CurrencyType currency;
 
+    public ProductPrice() {
+
+    }
 }

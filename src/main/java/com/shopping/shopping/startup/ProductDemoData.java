@@ -5,7 +5,7 @@ import com.shopping.shopping.service.ProductCommandService;
 import com.shopping.shopping.service.ProductQueryService;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class ProductDemoData {
 
     private final ProductCommandService productCommandService;
 
-    //@EventListener(ApplicationReadyEvent.class)
+    //@EventListener(ApplicationStartedEvent.class)
     public void migrate() {
         Long countOfData = productQueryService.count();
         if (countOfData.equals(0L)) {

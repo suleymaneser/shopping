@@ -40,6 +40,7 @@ public class Product {
     @JoinColumn(name = "productPriceId")
     private ProductPrice productPrice;
 
+    @ManyToOne
     @JoinColumn(name = "sellerId")
     private Customer seller;
 
