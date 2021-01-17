@@ -20,5 +20,11 @@ npm run build
 npm run lint
 ```
 
+### For Local npm config registry
+```
+npm config set registry https://registry.npmjs.org/
+npm install sass sass-loader
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
