@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getProducts() {
-      get('products').then(response => {
+      get('/api/product/getAllProduct').then(response => {
         this.products = response.data;
       })
     }
