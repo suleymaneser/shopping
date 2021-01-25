@@ -7,7 +7,7 @@
             <div class="product">
               <div class="row">
                 <div class="col-md-3">
-                  <img class="img-fluid mx-auto d-block image" :src="item.image">
+                  <img class="img-fluid mx-auto d-block image" :src="item.description">
                 </div>
                 <div class="col-md-6">
                   <div class="info">
@@ -21,7 +21,7 @@
                               item.seller.name }}</a>
                             </div>
                             <div class="product-info-detail"><span v-if="item.freeDelivery"> FREE </span>Delivery: <span
-                                class="value">{{ item.deliveryIn }}</span></div>
+                                class="value">{{ item.productCode }}</span></div>
                             <div class="product-info-detail"><span class="value" v-html="item.features"></span></div>
                           </div>
                         </div>
@@ -36,7 +36,7 @@
                       <input id="quantity" type="number" value="1" class="form-control quantity-input">
                     </div>
                     <div class="col-md-6 price">
-                      <span>{{ item.money }} {{ item.price }}  {{item.moneySymbol}}</span>
+                      <span>{{ item.productPrice.amount }} {{ item.productPrice.currency }} </span>
                     </div>
                   </div>
                 </div>
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getProducts() {
-      get('/api/product/getAllProduct').then(response => {
+      get('http://localhost:8080/api/product/getAllProduct').then(response => {
         this.products = response.data;
       })
     }
