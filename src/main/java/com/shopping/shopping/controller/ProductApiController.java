@@ -38,6 +38,7 @@ public class ProductApiController {
         return productCommandService.createProduct(dto);
     }
 
+    @CrossOrigin
     @GetMapping(value = "/getAllProduct")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "getAllProduct", notes = "Get All Product")
