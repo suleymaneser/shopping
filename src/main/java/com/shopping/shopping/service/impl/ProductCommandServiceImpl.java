@@ -96,6 +96,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
         product.setProductCode(dto.getProductCode());
         product.setCategoryId(prepareCategory(dto.getCategoryId()));
         product.setFeatures(dto.getFeatures());
+        product.setImages(dto.getImages());
         product.setProductPrice(prepareProductPrice(dto.getProductPrice().fromDto()));
         product.setSeller(checkAndPrepareSeller(dto.getSellerId()));
         product.setIsActive(true);

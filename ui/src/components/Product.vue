@@ -7,7 +7,7 @@
             <div class="product">
               <div class="row">
                 <div class="col-md-3">
-                  <img class="img-fluid mx-auto d-block image" :src="item.description">
+                  <img class="img-fluid mx-auto d-block image" :src="item.images">
                 </div>
                 <div class="col-md-6">
                   <div class="info">

@@ -23,6 +23,8 @@ public class ProductDTO {
 
     private String features;
 
+    private String images;
+
     private ProductPriceDTO productPrice;
 
     private Long sellerId;

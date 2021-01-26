@@ -1,6 +1,7 @@
 package com.shopping.shopping.domain;
 
 import com.shopping.shopping.dto.ProductDTO;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +36,8 @@ public class Product {
     private String description;
 
     private String features;
+
+    private String images;
 
     @ManyToOne
     @JoinColumn(name = "productPriceId")
