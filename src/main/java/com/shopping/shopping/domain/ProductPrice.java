@@ -24,9 +24,10 @@ public class ProductPrice {
 
     private BigDecimal amount;
 
+    //@Enumerated(EnumType.STRING)
     private CurrencyType currency;
 
     public ProductPrice() {
-
     }
+
 }
