@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,12 @@ public class CustomerApiController {
     @ApiOperation(value = "getAllCustomer", notes = "Get All Customer")
     public List<Customer> getAllCustomer() {
         return customerQueryService.getAllCustomer();
+    }
+
+    @GetMapping(value = "/getAllCustomerByStatus/{status}")
+    @ApiOperation(value = "getAllCustomerByStatus", notes = "Get All Customer By Status")
+    public List<Customer> getAllCustomerByStatus(@PathVariable boolean status) {
+        return customerQueryService.getAllCustomerByStatus(status);
     }
 
 }

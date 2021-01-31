@@ -9,4 +9,6 @@ public interface CustomerQueryService {
 
     List<Customer> getAllCustomer();
 
+    List<Customer> getAllCustomerByStatus(boolean status);
+
 }
