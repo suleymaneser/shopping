@@ -11,8 +11,6 @@ import lombok.Setter;
 @Builder
 public class CustomerTypeDTO {
 
-    private Long id;
-
     private String code;
 
     private String description;
