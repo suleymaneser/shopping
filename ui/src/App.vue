@@ -1,14 +1,17 @@
 <template>
   <Product/>
+  <Customer/>
 </template>
 
 <script>
 import Product from './components/Product.vue'
+import Customer from './components/Customer.vue'
 
 export default {
   name: 'App',
   components: {
-    Product
+    Product,
+    Customer
   }
 }
 </script>
