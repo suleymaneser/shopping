@@ -18,8 +18,8 @@
                                                     <div class="customer-info">
                                                         <div class="customer-info-detail">{{ item.address }}</div>
                                                         <div class="customer-info-detail"><span v-if="item.phoneNumber"> </span>Phone Number: <span
-                                                                class="value">{{ item.status }}</span></div>
-                                                        <div class="customer-info-detail"><span class="value" v-html="item.typeCode.description"></span></div>
+                                                                class="value">{{ item.phoneNumber }}</span></div>
+                                                        <div class="customer-info-detail">TYPE: <span class="value" v-html="item.typeCode.description"></span></div>
                                                     </div>
                                                 </div>
                                             </div>

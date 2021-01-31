@@ -3,8 +3,6 @@
     <h1>Hoşgeldiniz</h1>
     <p>Ürünler ve müşteri bilgileri için ilgili sayfaya menüden geçebilirsiniz.</p>
   </div>
-
-    <h2 style="text-align:center">Servislerimiz</h2>
     <div class="row">
       <div class="column">
         <div class="card">
@@ -32,9 +30,9 @@
 
       <div class="column">
         <div class="card">
-          <img src="../assets/market.jpg" alt="Pazar" style="width:75%">
+          <img src="../assets/market.jpg" alt="Market" style="width:75%">
           <div class="container">
-            <h2>Pazar</h2>
+            <h2>Market</h2>
             <p class="title">Shoppingin merkezi servislerinden.</p>
             <p>market@example.com</p>
             <p><button class="button">Ürün Ara</button></p>
@@ -60,13 +58,13 @@
 
   .column {
     float: left;
-    width: 30%;
-    margin-bottom: 16px;
+    width: 33.3%;
+    margin-bottom: 20px;
     padding: 0 8px;
   }
 
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 8px;
   }
 
