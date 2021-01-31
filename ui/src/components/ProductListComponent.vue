@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import {get} from "@/common/api.service";
+import {getAllProduct} from "@/common/product.service";
 export default {
   name: 'Product',
   components: {},
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getProducts() {
-      get('http://localhost:8080/api/product/getAllProduct').then(response => {
+      getAllProduct().then(response => {
         this.products = response.data;
       })
     }

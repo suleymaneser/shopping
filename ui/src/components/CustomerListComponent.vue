@@ -49,24 +49,24 @@
 </template>
 
 <script>
-    import {get} from "@/common/api.service";
-    export default {
-        name: 'Customer',
-        components: {},
-        data() {
-            return {customers: []}
-        },
-        created() {
-            this.getCustomers();
-        },
-        methods: {
-            getCustomers() {
-                get('http://localhost:8080/api/customer/getAllCustomer').then(response => {
-                    this.customers = response.data;
-                })
-            }
-        }
+import {getAllCustomer} from "@/common/customer.service";
+export default {
+  name: 'Customer',
+  components: {},
+  data() {
+    return {customers: []}
+  },
+  created() {
+    this.getCustomers();
+  },
+  methods: {
+    getCustomers() {
+      getAllCustomer().then(response => {
+        this.customers = response.data;
+      })
     }
+  }
+}
 </script>
 
 
