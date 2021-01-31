@@ -5,8 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.shopping.shopping.dto.CategoryDTO;
+import com.shopping.shopping.dto.CustomerTypeDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
@@ -22,4 +26,10 @@ public class Category {
 
     private String code;
 
+    public CategoryDTO toDTO(String name, String code) {
+        CategoryDTO dto = new CategoryDTO();
+        dto.setName(name);
+        dto.setCode(code);
+        return dto;
+    }
 }
