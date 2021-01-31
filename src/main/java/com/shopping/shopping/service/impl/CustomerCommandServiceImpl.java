@@ -6,6 +6,7 @@ import com.shopping.shopping.dto.CustomerDTO;
 import com.shopping.shopping.repository.CustomerRepository;
 import com.shopping.shopping.repository.CustomerTypeRepository;
 import com.shopping.shopping.service.CustomerCommandService;
+import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

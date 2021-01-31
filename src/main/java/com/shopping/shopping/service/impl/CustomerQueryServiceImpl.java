@@ -25,4 +25,11 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
         return customerRepository.findAll();
     }
 
+    // given status when list all customer info
+    @Override
+    public List<Customer> getAllCustomerByStatus(boolean status) {
+        List<Customer> customerList = customerRepository.findAllByStatus(status);
+        return customerList;
+    }
+
 }
